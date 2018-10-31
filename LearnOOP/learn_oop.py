@@ -27,3 +27,20 @@ lisa.oop_print_score()
 opp_print_score(std1)
 opp_print_score(std2)
 
+print("============ 2. 封装 继承 多态 ============")
+younix = Student('Younix',22) # younix 为 Student 的一个 instance
+print(younix)
+print(Student)
+
+# 封装 继承
+class Student2(Student):
+    def get_grade(self):
+        if self.score >= 90:
+            return 'A'
+        elif self.score >= 60:
+            return 'B'
+        else:
+            return 'C'
+
+Linda = Student2('Linda',99)
+print(Linda.name, 'is' , Linda.get_grade())
