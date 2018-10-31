@@ -12,10 +12,17 @@ def opp_print_score(std):
 # OOP 面向对象
 class Student(object):
     def __init__(self,name,score):
-        self.name = name
-        self.score = score
+        self.__name = name
+        self.__score = score
+
+    def get_name(self):
+        return self.__name
+
+    def get_score(self):
+        return self.__score
+
     def oop_print_score(self):
-        print('OOP %s: %s' % (self.name, self.score))
+        print('OOP %s: %s' % (self.__name, self.__score))
 
 # Test1
 bart = Student('Bart Aiiage', 59)
@@ -35,12 +42,12 @@ print(Student)
 # 封装 继承
 class Student2(Student):
     def get_grade(self):
-        if self.score >= 90:
+        if self.get_score() >= 90:
             return 'A'
-        elif self.score >= 60:
+        elif self.get_score() >= 60:
             return 'B'
         else:
             return 'C'
 
 Linda = Student2('Linda',99)
-print(Linda.name, 'is' , Linda.get_grade())
+print(Linda.get_name(), 'is' , Linda.get_grade())
