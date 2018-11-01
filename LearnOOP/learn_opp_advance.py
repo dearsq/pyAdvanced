@@ -298,3 +298,39 @@ if bart.gender == Gender.Male:
     print('测试通过!')
 else:
     print('测试失败!')
+
+
+
+print("============ 元类 ============")
+'''
+动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的
+type() 语法:
+type(object) # 返回对象类型
+type(name, bases, dict) # 返回新的对象类型
+name 是 class名称
+bases 是 继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法
+dict 是 class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上 hello=fn
+
+# 三个参数的用法
+>>> class X(object):
+...     a = 1
+...
+>>> X = type('X', (object,), dict(a=1))  # 产生一个新的类型 X
+>>> X
+<class '__main__.X'>
+'''
+
+print("============ metaclass ============")
+'''
+当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。
+但是如果我们想创建出类呢？那就必须根据metaclass创建出类，所以：先定义metaclass，然后创建类。
+连接起来就是：先定义metaclass，就可以创建类，最后创建实例。
+'''
+# metaclass是类的模板，所以必须从`type`类型派生：
+class ListMetaclass(type):
+    def __new__(cls, name, bases, attrs):
+        attrs['add'] = lambda self, value: self.append(value)
+        return type.__new__(cls, name, bases, attrs)
+
+class MyList(list, metaclass=ListMetaclass):
+    pass
