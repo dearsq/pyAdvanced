@@ -208,3 +208,39 @@ class Fib(object):
 
 for n in Fib():
     print(n)
+
+print("============ __getitem__ 要表现的像 list 那样按照下标取出元素 ============")
+class Fib(object):
+    def __getitem__(self, n):
+        a, b = 1, 1
+        for x in range(n):
+            a, b = b, a + b
+        return a
+
+f = Fib()
+print(f[0],f[1],"...",f[10])
+#print(f[0:10]) 无法切片 slice 对象无法被作为整型使用
+
+print("============ __getitem__ 要能够使用 slice ============")
+class Fib2(object):
+    def __getitem__(self, n):
+        if isinstance(n, int): # n是索引
+            a, b = 1, 1
+            for x in range(n):
+                a, b = b, a + b
+            return a
+        if isinstance(n, slice): # n是切片
+            start = n.start
+            stop = n.stop
+            if start is None:
+                start = 0
+            a, b = 1, 1
+            L = []
+            for x in range(stop):
+                if x >= start:
+                    L.append(a)
+                a, b = b, a + b
+            return L
+
+f2 = Fib2()
+print(f2[0:5])
