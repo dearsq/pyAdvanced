@@ -71,3 +71,53 @@ s.score = 60 # ok!
 print(s.score)
 # s.score = 9999 # Error!
 # ValueError: score must between 0 ~ 100!
+
+
+class Student(object):
+
+    @property
+    def birth(self):
+        return self._birth
+
+    @birth.setter
+    def birth(self, value):
+        self._birth = value
+
+    @property
+    def age(self):
+        return 2015 - self._birth
+
+# birth 可读可写
+# age 仅读
+
+class Screen(object):
+
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self,value):
+        self._width = value
+
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self,value):
+        self._height = value
+
+    @property
+    def resolution(self):
+        return self._height * self._width
+
+# 测试:
+s = Screen()
+s.width = 1024
+s.height = 768
+print('resolution =', s.resolution)
+if s.resolution == 786432:
+    print('测试通过!')
+else:
+    print('测试失败!')
