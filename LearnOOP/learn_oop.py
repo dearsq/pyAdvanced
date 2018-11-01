@@ -40,7 +40,7 @@ lisa.oop_print_score()
 opp_print_score(std1)
 opp_print_score(std2)
 
-print("============ 2. 封装 继承 多态 ============")
+print("============ 2. 封装 继承 ============")
 younix = Student('Younix',22) # younix 为 Student 的一个 instance
 print(younix)
 print(Student)
@@ -57,3 +57,84 @@ class Student2(Student):
 
 Linda = Student2('Linda',99)
 print(Linda.get_name(), 'is' , Linda.get_grade())
+
+# 多态
+class Animal(object):
+    def run(self):
+        print("Animal is running ...")
+
+class Dog(Animal):
+    def __init__(self):
+        print("I am dog ...")
+
+    def run(self):
+        print("Dog is running ...")
+
+class Cat(Animal):
+    def __init__(self):
+        print("I am cat ...")
+
+
+jerry = Dog()
+jerry.run()
+
+tom = Cat()
+tom.run()
+
+print(isinstance(jerry, Animal))
+print(isinstance(jerry, Dog))
+print(isinstance(jerry, Cat))
+
+
+print("============ 3. 获取对象信息 ============")
+print(type(123))
+print(type('abcdefg'))
+print(type(None))
+
+# 判断是否为函数
+import types
+def fn():
+    pass
+print(type(fn)==types.FunctionType)
+print(type(abs)==types.BuiltinFunctionType)
+print(type(lambda x: x+1)==types.LambdaType)
+print(type((x for x in range(10)))==types.GeneratorType)
+
+# 获取一个对象的所有属性和方法 dir()
+print(dir('ABC'))
+print(dir(jerry)) # 可以看到 run
+
+# getattr() setattr() hasattr()
+
+class NumberObject(object):
+    def __init__(self):
+        self.x = 9
+    def power(self):
+        return self.x * self.x
+
+mNumber = NumberObject()
+print(hasattr(mNumber,'x')) #有属性x吗 True
+print(hasattr(mNumber,'y')) #有属性y吗 False
+setattr(mNumber,'y',99) #设置属性y
+print(hasattr(mNumber,'y')) #有属性y吗 True
+print(getattr(mNumber,'y')) #获取属性y 99
+print(mNumber.y) #打印mNumber.y 99
+
+
+class ImageObject(object):
+    def read(self):
+        print("ImageObject: I am read")
+
+mImage = ImageObject()
+
+def readData(io):
+    print("I am reading data")
+
+def readImage(fp):
+    if hasattr(fp, 'read'):
+        return readData(fp)
+    print("return None")
+    return None
+
+readImage(mImage)   # has read
+readImage(mNumber)  # None
