@@ -121,3 +121,74 @@ if s.resolution == 786432:
     print('测试通过!')
 else:
     print('测试失败!')
+
+print("============ 多重继承 ============")
+class Animal(object):
+    pass
+
+# 大类:
+class Mammal(Animal):
+    pass
+
+class Bird(Animal):
+    pass
+
+# 各种动物:
+class Dog(Mammal):
+    pass
+
+class Bat(Mammal):
+    pass
+
+class Parrot(Bird):
+    pass
+
+class Ostrich(Bird):
+    pass
+
+class RunnableMixIn(object):
+    def run(self):
+        print('Running...')
+
+class FlyableMixIn(object):
+    def fly(self):
+        print('Flying...')
+
+print("============ MixIn ============")
+
+class CarnivorousMixIn(object):
+    def eatmeat(self):
+        print('Eating meats...')
+
+class HerbivoresMixIn(object):
+    def eatgrass(self):
+        print('Eating grass...')
+
+class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):
+    pass
+
+class Bat(Mammal, FlyableMixIn):
+    pass
+
+print("============ 定制类 ============")
+print("============ __str__ __repr__ ============")
+class Student(object):
+    def __init__(self, name):
+        self.name = name
+
+print(Student('Michael'))
+print(Student('Good'))
+print(Student(''))
+
+class Student(object):
+    def __init__(self, name):
+        self.name = name
+    def __str__(self):
+        return 'Student object (name:%s)' % self.name
+
+print(Student('Michael'))
+s = Student('Michael')
+print(s)
+print("__str__:",s.__str__())
+print("__repr__:",s.__repr__())
+
