@@ -70,10 +70,11 @@ def bar(s):
 
 def main():
     try:
-        bar(0)
+        # bar(0)
+        bar(1)
     except Exception as e:
-        print('Error',e)
-        # logging.exception(e)
+        #print('Error',e)
+        logging.exception(e)
     finally:
         print("Logging record...")
 
@@ -128,3 +129,34 @@ def main():
     print("END.")
 
 main()
+
+
+print("============ 2. 调试 ============")
+print("============ 2. 调试 , assert ============")
+'''
+断言 assert
+'''
+def foo(s):
+    n = int(s)
+    assert n != 0, 'n is zero!'
+    # n != 0 应该是 True
+    return 10 / n
+
+def main():
+    #foo('0')
+    foo(1)
+
+main()
+
+
+print("============ 2. 调试 , logging ============")
+import logging
+
+s = '0'
+n = int(s)
+logging.basicConfig(level=logging.INFO)
+logging.info('n = %d' % n)
+print(10 / n) # ZeroDivisionError: division by zero
+
+print("============ 2. 调试 , pdb ============")
+print("============ 2. 调试 , IDE ============")
